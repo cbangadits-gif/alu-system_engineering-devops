@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+# Configures a brand new Ubuntu server with Nginx and adds a custom
+# HTTP response header (X-Served-By) containing the server hostname.
+# shellcheck disable=SC2154
+
+# Step 1: update the package list and install Nginx
+sudo apt-get update -y
+sudo apt-get install -y nginx
+
+# Step 2: create the web pages (same content on web-01 and web-02)
+echo "Hello World!" | sudo tee /var/www/html/index.nginx-debian.html > /dev/null
+echo "Ceci n'est pas une page" | sudo tee /var/www/html/404.html > /dev/null
+
+# Step 3: add the custom header X-Served-By with the hostname (only once)
+if ! grep -q "X-Served-By" /etc/nginx/sites-available/default; then
+    sudo sed -i "/server_name _;/a add_header X-Served-By $(hostname);" /etc/nginx/sites-available/default
+fi
+
+# Step 4: add the 301 redirection for /redirect_me (only once)
+if ! grep -q "redirect_me" /etc/nginx/sites-available/default; then
+    sudo sed -i "/server_name _;/a rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;" /etc/nginx/sites-available/default
+fi
+
+# Step 5: add the custom 404 error page (only once)
+if ! grep -q "error_page 404" /etc/nginx/sites-available/default; then
+    sudo sed -i "/server_name _;/a error_page 404 /404.html;" /etc/nginx/sites-available/default
+fi
+
+# Step 6: test the Nginx configuration, then restart the service
+sudo nginx -t
+sudo service nginx restart
