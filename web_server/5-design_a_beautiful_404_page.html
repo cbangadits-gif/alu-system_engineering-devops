@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>404 - Ceci n'est pas une page</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family: Georgia, "Times New Roman", serif;
+    color: #f5f0e6;
+    background: linear-gradient(135deg, #1b1f3b, #3a2a5a 55%, #6b3a5e);
+    overflow: hidden;
+  }
+  .stars span {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: #fff;
+    border-radius: 50%;
+    opacity: 0.6;
+    animation: twinkle 3s infinite ease-in-out;
+  }
+  .stars span:nth-child(1) { top: 12%; left: 15%; animation-delay: 0s; }
+  .stars span:nth-child(2) { top: 25%; left: 80%; animation-delay: 0.6s; }
+  .stars span:nth-child(3) { top: 70%; left: 10%; animation-delay: 1.2s; }
+  .stars span:nth-child(4) { top: 82%; left: 70%; animation-delay: 1.8s; }
+  .stars span:nth-child(5) { top: 40%; left: 92%; animation-delay: 2.4s; }
+  .stars span:nth-child(6) { top: 8%; left: 55%; animation-delay: 0.3s; }
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.2; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.8); }
+  }
+  .card {
+    position: relative;
+    padding: 2rem 1.5rem;
+    max-width: 640px;
+  }
+  .code {
+    font-size: clamp(6rem, 22vw, 11rem);
+    font-weight: bold;
+    line-height: 1;
+    letter-spacing: 0.05em;
+    background: linear-gradient(90deg, #ffd27d, #ff7eb3, #7ec8ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: float 4s infinite ease-in-out;
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-14px); }
+  }
+  h1 {
+    margin-top: 1rem;
+    font-size: clamp(1.4rem, 5vw, 2.2rem);
+    font-style: italic;
+    font-weight: normal;
+  }
+  p {
+    margin-top: 1rem;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: #d9d2c3;
+  }
+  .btn {
+    display: inline-block;
+    margin-top: 2rem;
+    padding: 0.85rem 2rem;
+    color: #1b1f3b;
+    background: #ffd27d;
+    border-radius: 999px;
+    text-decoration: none;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    letter-spacing: 0.04em;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .btn:hover {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 10px 25px rgba(255, 210, 125, 0.35);
+  }
+  footer {
+    margin-top: 2.5rem;
+    font-size: 0.85rem;
+    color: #a89fb8;
+  }
+</style>
+</head>
+<body>
+  <div class="stars"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+  <main class="card">
+    <div class="code">404</div>
+    <h1>Ceci n'est pas une page</h1>
+    <p>
+      Just like Magritte's famous painting, what you are looking for
+      does not exist here: the page you requested could not be found
+      or has been moved.
+    </p>
+    <a class="btn" href="/">Back to home</a>
+    <footer>Holberton School &middot; HTTP Error 404</footer>
+  </main>
+</body>
+</html>
